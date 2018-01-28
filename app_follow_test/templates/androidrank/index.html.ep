@@ -1,0 +1,90 @@
+% layout 'default';
+% title 'Welcome';
+
+<div class="ui fixed inverted menu">
+	<div class="ui container">
+		<a href="#" class="header item">
+			AppFollow Test
+		</a>
+	</div>
+</div>
+
+<div class="ui main text container">
+	<h1 class="ui header">AndroidRank Viewer</h1>
+
+	<div class="ui grid">
+		<div class="thirteen wide column">
+			<div class="ui search">
+				<div class="ui icon input">
+					<input  size="63" class="prompt" type="text" placeholder="Search applications...">
+						<i class="search icon"></i>
+					</div>
+				<div class="results"></div>
+			</div>
+		</div>
+		<div class="three wide column center aligned"><button id="reset" class="ui button app_details">Reset</button></div>
+	</div>
+
+	<h2 class="ui center aligned icon header app_details">
+		<i class="circular icon">
+			<img class="app_icon" id="app_icon" src="https://lh3.googleusercontent.com/5sinG5_U9rajYjXRZ57nKDQsGTJG0jEG2zByNa9TndlX2Yu1MbfCtyoI2oMdRvQtxBA=w64" />
+		</i>
+		<span id="artist_name">Friends</span>
+	</h2>
+
+	<div class="ui one column grid app_description app_details">
+		<div class="row">
+			<div class="column">
+				<p id="app_description"></p>
+			</div>
+		</div>
+	</div>
+
+	<h3 class="app_details">Information (ID: <span id="artist_id"></span>)</h3>
+	<div class="ui two column grid app_details">
+		<div class="row">
+			<div id="app_info" class="column">
+
+			</div>
+			<div id="app_installs" class="column">
+
+			</div>
+		</div>
+		<div class="row">
+			<div id="app_rating_scores" class="column">
+
+			</div>
+			<div id="app_rating_values" class="column">
+
+			</div>
+		</div>
+	</div>
+
+	<h3 class="app_details">Country Rankings</h3>
+	<div class="ui one column grid app_details app_description">
+		<div class="row">
+			<div class="column" id="app_countries">
+			</div>
+		</div>
+	</div>
+
+	<div id="preview">
+		<div class="ui one column grid">
+			<div class="row">
+				<p><img src="https://semantic-ui.com/images/wireframe/paragraph.png" /></p>
+			</div>
+			<div class="row">
+				<p><img src="https://semantic-ui.com/images/wireframe/paragraph.png" /></p>
+			</div>
+			<div class="row">
+				<p><img src="https://semantic-ui.com/images/wireframe/paragraph.png" /></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="ui inverted vertical footer segment">
+	<div class="ui center aligned container">
+		<img style="width: 300px" src="https://appfollow.io/assets/2/img/svg/appfollow_logo_gray.svg" class="ui centered mini image">
+	</div>
+</div>

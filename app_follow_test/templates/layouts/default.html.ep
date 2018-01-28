@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title><%= title %></title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+	<script
+		src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+
+	  <style type="text/css">
+	  body {
+		background-color: #FFFFFF;
+	  }
+	  .ui.menu .item img.logo {
+		margin-right: 1.5em;
+	  }
+	  .main.container {
+		margin-top: 4em;
+	  }
+	  .wireframe {
+		margin-top: 2em;
+	  }
+	  .ui.footer.segment {
+		margin: 2em 0em 0em;
+		padding: 2em 0em;
+	  }
+	  .app_icon {
+	  	position: relative;
+	  	top: -7px;
+	  	left: -7px;
+	  }
+	  #reset {
+	  	position: relative;
+    	top: 4px;
+	  }
+	  div.country_label {
+	  	margin-bottom: 3px !important;
+	  }
+	  </style>
+	  <script>
+	  $(function() {
+	      $('#reset').click(function () {
+	          $('.app_details').hide();
+	          $('#preview').show();
+	          $('input.prompt').val('');
+	      });
+		  $('.app_details').hide();
+		  $('#preview').show();
+		  $('.ui.search').search(
+		      {
+		  		apiSettings: {
+		  		   url: '/suggest/?query={query}'
+				},
+  			  	minCharacters : 3,
+			  	onSelect: function(result, response) {
+				    get_app_details(result.ext_id);
+				}
+			  }
+		  );
+		  function get_app_details(ext_id) {
+		      $.get(
+		          '/app_details/',
+		          {
+		              ext_id: ext_id
+		          },
+		          function (response, result) {
+		              if (result === 'success') {
+		                  $('#app_icon').attr('src', response.icon);
+		                  $('#artist_id').html(response.artist_id);
+		                  $('#artist_name').html(response.artist_name);
+		                  $('#app_description').html(response.short_text);
+
+		                  for (var country_name in response.country_rankings) {
+		                      $("#app_countries")
+		                      	.append("<div class=\"ui label country_label\">" +
+		                      	 "<i class=\""+country_name+" flag\"></i> " + response.country_rankings[country_name] +
+		                      	  "</div>");
+		                  }
+
+		                  $('#app_info').html(make_table("Android application info", response.app_info));
+		                  $('#app_installs').html(make_table("App installs", response.app_installs));
+		                  $('#app_rating_scores').html(make_table("Rating scores", response.rating_score));
+		                  $('#app_rating_values').html(make_table("Rating values", response.rating_values));
+
+		                  $('.app_details').show();
+		                  $('#preview').hide();
+		              }
+		          }
+		      );
+		  }
+		  function make_table(name, data) {
+		    var table = '<table class="ui table">' +
+		       '<thead>' +
+		        '<tr>' +
+		         '<th colspan="2">' +
+		         	name +
+		         '</th>' +
+		        '</tr>' +
+		       '</thead>' +
+		       '<tbody>';
+		    for (var item in data) {
+		      	table = table +
+		      		"<tr>" +
+		      			"<td>" + item + "</td>" +
+						"<td>" + data[item] + "</td>" +
+					"</tr>";
+		    }
+			table = table + '</tbody></table>';
+		    return table;
+		  }
+	  });
+	</script>
+  </head>
+  <body><%= content %></body>
+</html>
